@@ -13,12 +13,36 @@ public class CoinAPI {
         StringBuilder response = new StringBuilder();
         try {
             String apiUrl = "https://api.coinapi.io/v1/assets/" + assetSymbol;
-            @SuppressWarnings("deprecation")
             URL url = new URL(apiUrl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             con.setRequestProperty("X-CoinAPI-Key", API_KEY);
             
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            con.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return response.toString();
+    }
+
+    public String getExchangeData( String symbolID ) {
+        StringBuilder response = new StringBuilder();
+        try {
+            String apiURL = "https://rest.coinapi.io/v1/orderbooks/" + symbolID + "/current/?limit_levels=1";
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("X-CoinAPI-Key", API_KEY);
+
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
 
