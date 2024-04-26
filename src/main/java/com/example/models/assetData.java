@@ -1,15 +1,11 @@
 package com.example.models;
 
-public class assetData {
+public class AssetData {
 
     private String assetName;
-    private Float assetID;
-    private Double priceUSD;
-    private Double dayVolumeUSD;
-    private Double hourVolumeUSD;
-
-    public assetData() {
-        
-    }
-
+    private double assetID;
+    private double priceUSD;
+    private double dayVolumeUSD;
+    private double hourVolumeUSD;
+    
 }

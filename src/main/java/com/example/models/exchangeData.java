@@ -1,5 +1,9 @@
 package com.example.models;
 
-public class exchangeData {
+public class ExchangeData {
+
+    public ExchangeData() {
+
+    }
     
 }

@@ -10,20 +10,21 @@ public class App {
     public static void main(String[] args) {
         CoinAPI coinAPI = new CoinAPI();
 
-    {/* Prints asset data (price, name, volume, etc.) for the specified assetIDBase */}
+    /* Prints asset data (price, name, volume, etc.) for the specified assetIDBase */
 
         // String assetData = coinAPI.getAssetData(assetIDBase);
         // System.out.println("Asset data for " + assetIDBase + ":");
         // System.out.println(assetData);
+        // coinAPI.parse(assetData);
 
 
-    {/* Prints exchange data (lowest ask price, highest bid price) for the specified assetIDBase */}
+    /* Prints exchange data (lowest ask price, highest bid price) for the specified assetIDBase */
 
         for (String exchangeID: exchangeIDs) {
             String symbolID = exchangeID + "_SPOT_" + assetIDBase + "_" + assetIDQuote;
             String assetData = coinAPI.getExchangeData(symbolID);
             System.out.println("Quote data for " + symbolID + ":");
-            System.out.println(assetData);
+            System.out.println(assetData + "\n");
         }
 
     }
