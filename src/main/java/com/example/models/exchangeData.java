@@ -1,6 +1,8 @@
 package com.example.models;
 
-public class ExchangeData {
+import com.example.util.CoinAPI;
+
+public class ExchangeData extends CoinAPI {
 
     public ExchangeData() {
 
