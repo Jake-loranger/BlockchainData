@@ -3,11 +3,12 @@ package com.example;
 import com.google.gson.Gson;
 
 import com.example.models.AssetData;
+import com.example.models.ExchangeData;
 import com.example.util.CoinAPI;
 
 public class App {
     private static String assetIDBase = "BTC";
-    private static String[] exchangeIDs = {"BINANCE", "KRAKEN", "COINBASE", "GEMINI", "ITBIT", "KUCOIN"};
+    private static String[] exchangeIDs = {"KRAKEN", "COINBASE", "GEMINI", "ITBIT"};
 
     public static void main(String[] args) {
         CoinAPI coinAPI = new CoinAPI();
@@ -26,10 +27,8 @@ public class App {
     /* MARKDOWN - Prints exchange data (lowest ask price, highest bid price) for the specified asset\ */
 
         for (String exchangeID: exchangeIDs) {
-            String symbolID = exchangeID + "_SPOT_" + assetIDBase + "_USD";
-            String assetData = coinAPI.getExchangeData(symbolID);
-            System.out.println("Quote data for " + symbolID + ":");
-            System.out.println(assetData + "\n");
+            ExchangeData assetData = coinAPI.getExchangeData(assetIDBase, exchangeID);
+            System.out.println(assetData.getExchange());
         }
 
     }

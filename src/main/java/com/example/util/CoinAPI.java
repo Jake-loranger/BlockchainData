@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.example.models.AssetData;
+import com.example.models.ExchangeData;
 import com.google.gson.Gson;
 
 public class CoinAPI {
@@ -24,14 +25,13 @@ public class CoinAPI {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-            
-
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
-            in.close();
 
+            in.close();
             con.disconnect();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,10 +43,11 @@ public class CoinAPI {
         return assetData;
     }
 
-    public String getExchangeData(String symbolID) {
-        StringBuilder response = new StringBuilder();
+    public ExchangeData getExchangeData(String assetID, String exchangeID) {
+        String symbolID = exchangeID + "_SPOT_" + assetID + "_USD";
         String apiURL = "https://rest.coinapi.io/v1/orderbooks/" + symbolID + "/current/?limit_levels=1";
 
+        StringBuilder response = new StringBuilder();
         try {
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -55,17 +56,21 @@ public class CoinAPI {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
-            in.close();
 
+            in.close();
             con.disconnect();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return response.toString();
+        Gson gson = new Gson(); 
+        ExchangeData exchangeData = gson.fromJson((response.toString()), ExchangeData.class);
+        exchangeData.setExchange(exchangeID);
+
+        return exchangeData;
     }
 }
