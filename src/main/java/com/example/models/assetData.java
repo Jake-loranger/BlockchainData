@@ -4,41 +4,59 @@ import com.example.util.CoinAPI;
 
 public class AssetData extends CoinAPI {
 
-    private String assetName;
-    private double assetID;
-    private double priceUSD;
-    private double dayVolumeUSD;
-    private double hourVolumeUSD;
+    private String name;
+    private String asset_id;
+    private float price_usd;
+    private float volume_1mth_usd;
+    private float volume_1day_usd;
+    private float volume_1hrs_usd;
     
     public String getAssetName() {
-        return assetName;
+        return name;
     }
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
+
+    public void setAssetName(String name) {
+        this.name = name;
     }
-    public double getAssetID() {
-        return assetID;
+    
+    public String getAssetID() {
+        return asset_id;
     }
-    public void setAssetID(double assetID) {
-        this.assetID = assetID;
+    
+    public void setAssetID(String asset_id) {
+        this.asset_id = asset_id;
     }
-    public double getPriceUSD() {
-        return priceUSD;
+    
+    public float getPriceUSD() {
+        return price_usd;
     }
-    public void setPriceUSD(double priceUSD) {
-        this.priceUSD = priceUSD;
+    
+    public void setPriceUSD(float price_usd) {
+        this.price_usd = price_usd;
     }
-    public double getDayVolumeUSD() {
-        return dayVolumeUSD;
+    
+    public float getMonthVolumeUSD() {
+        return volume_1mth_usd;
     }
-    public void setDayVolumeUSD(double dayVolumeUSD) {
-        this.dayVolumeUSD = dayVolumeUSD;
+    
+    public void setMonthVolumeUSD(float volume_1mth_usd) {
+        this.volume_1mth_usd = volume_1mth_usd;
     }
-    public double getHourVolumeUSD() {
-        return hourVolumeUSD;
+    
+    public float getDayVolumeUSD() {
+        return volume_1day_usd;
     }
-    public void setHourVolumeUSD(double hourVolumeUSD) {
-        this.hourVolumeUSD = hourVolumeUSD;
+    
+    public void setDayVolumeUSD(float volume_1day_usd) {
+        this.volume_1day_usd = volume_1day_usd;
+    }
+    
+    public float getHourVolumeUSD() {
+        return volume_1hrs_usd;
+    }
+    
+    public void setHourVolumeUSD(float volume_1hrs_usd) {
+        this.volume_1hrs_usd = volume_1hrs_usd;
     }
     
 }
