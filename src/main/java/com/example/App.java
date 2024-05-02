@@ -1,6 +1,6 @@
 package com.example;
 
-import com.google.gson.Gson;
+import java.util.Map;
 
 import com.example.models.AssetData;
 import com.example.models.ExchangeData;
@@ -28,7 +28,12 @@ public class App {
 
         for (String exchangeID: exchangeIDs) {
             ExchangeData assetData = coinAPI.getExchangeData(assetIDBase, exchangeID);
-            System.out.println(assetData.getExchange());
+            // System.out.println(assetData.toString());
+            String exchange = assetData.getExchange();
+            Map<String, Float> highest_bid = assetData.getBids();
+            Map<String, Float> lowest_ask = assetData.getAsks();
+            float spread = assetData.getSpread();
+            System.out.println(exchange + "\nLowest Ask: $" + lowest_ask.get("price") + "\nHighest Bid: $" + highest_bid.get("price") + "\nSpread: " + spread + "\n");
         }
 
     }

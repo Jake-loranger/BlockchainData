@@ -67,8 +67,9 @@ public class CoinAPI {
             e.printStackTrace();
         }
 
+        String jsonString = response.toString().replace("[", "").replace("]", "");
         Gson gson = new Gson(); 
-        ExchangeData exchangeData = gson.fromJson((response.toString()), ExchangeData.class);
+        ExchangeData exchangeData = gson.fromJson(jsonString, ExchangeData.class);
         exchangeData.setExchange(exchangeID);
 
         return exchangeData;
