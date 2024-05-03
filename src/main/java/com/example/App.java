@@ -2,9 +2,11 @@ package com.example;
 
 import java.util.Map;
 
+import com.example.models.AsaAsset;
 import com.example.models.AssetData;
 import com.example.models.ExchangeData;
 import com.example.util.CoinAPI;
+import com.example.util.VestigeAPI;
 
 public class App {
     private static String assetIDBase = "BTC";
@@ -26,15 +28,22 @@ public class App {
 
     /* MARKDOWN - Prints exchange data (lowest ask price, highest bid price) for the specified asset\ */
 
-        for (String exchangeID: exchangeIDs) {
-            ExchangeData assetData = coinAPI.getExchangeData(assetIDBase, exchangeID);
-            // System.out.println(assetData.toString());
-            String exchange = assetData.getExchange();
-            Map<String, Float> highest_bid = assetData.getBids();
-            Map<String, Float> lowest_ask = assetData.getAsks();
-            float spread = assetData.getSpread();
-            System.out.println(exchange + "\nLowest Ask: $" + lowest_ask.get("price") + "\nHighest Bid: $" + highest_bid.get("price") + "\nSpread: " + spread + "\n");
-        }
+        // for (String exchangeID: exchangeIDs) {
+        //     ExchangeData exchangeData = coinAPI.getExchangeData(assetIDBase, exchangeID);
+        //     String exchange = exchangeData.getExchange();
+        //     Map<String, Float> highestBid = exchangeData.getBids();
+        //     Map<String, Float> lowestAsk = exchangeData.getAsks();
+        //     float spread = exchangeData.getSpread();
+        //     System.out.println(exchange + "\nLowest Ask: $" + lowestAsk.get("price") + "\nHighest Bid: $" + highestBid.get("price") + "\nSpread: " + spread + "\n");
+        // }
 
+    /* MARKDOWN - Prints asset data for the specified ASA Asset on Algorand */
+
+        VestigeAPI vestigeAPI = new VestigeAPI(); 
+        AsaAsset output = vestigeAPI.getASAData("ALGO");
+        // System.out.println("Market Cap (ALGO): " + output.getMarketCap());
+        // System.out.println("Fully Diluted Market Cap (ALGO): " + output.getFdmc());
+        // System.out.println("Circulating Supply: % " + output.getCirculatingSupply());
+        System.out.println("% " + output.getChange24h() * 100);
     }
 }
