@@ -1,8 +1,6 @@
 package com.example.models;
 
-import com.example.util.VestigeAPI;
-
-public class AsaAsset extends VestigeAPI {
+public class ASAAsset {
     private Long id; 
     private String name; 
     private String ticker;
@@ -63,4 +61,18 @@ public class AsaAsset extends VestigeAPI {
     public Float getCirculatingSupply() {
         return market_cap / fdmc * 100;
     }
+
+    public void display() {
+        System.out.println( 
+            "Name: " + name + "\n" +
+            "ID: " + id + '\n' + 
+            "Price: " + price + " ALGO \n" + 
+            "Volume: " + volume24h + " ALGO \n" + 
+            "Market Cap: " + market_cap + " ALGO \n" + 
+            "Fully Diluted Market Cap: " + fdmc + " ALGO \n" + 
+            "Circulating Supply: " + (market_cap/fdmc*100) + " %\n" + 
+            "24 Hour Price Change: " + change24h + " % \n"
+        );
+    }
+
 }

@@ -3,7 +3,6 @@ package com.example.models;
 import com.example.util.CoinAPI;
 
 public class AssetData extends CoinAPI {
-
     private String name;
     private String asset_id;
     private float price_usd;
@@ -58,5 +57,14 @@ public class AssetData extends CoinAPI {
     public void setHourVolumeUSD(float volume_1hrs_usd) {
         this.volume_1hrs_usd = volume_1hrs_usd;
     }
-    
+
+    public void display() {
+        System.out.println(
+            "Asset: " + name + " (" + asset_id + ")\n" + 
+            "Price: $" + price_usd + "\n" + 
+            "Volume (hour): " + " $" + volume_1hrs_usd + " \n" +
+            "Volume (day): " + " $" + volume_1day_usd + " \n" +
+            "Volume (month): " + " $" + volume_1mth_usd + " \n"
+        );
+    }
 }

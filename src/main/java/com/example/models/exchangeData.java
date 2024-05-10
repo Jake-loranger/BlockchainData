@@ -11,9 +11,6 @@ public class ExchangeData extends CoinAPI {
     private Map<String, Float> bids;
     private float spread;
 
-    
-
-
     public String getExchange() {
         return exchange_name;
     }

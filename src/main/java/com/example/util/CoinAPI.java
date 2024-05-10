@@ -13,9 +13,8 @@ import com.google.gson.Gson;
 public class CoinAPI {
     private final static String API_KEY = "83F280F2-F2DA-495E-B1CC-D4EE75FCBDAC";
 
-    public AssetData getAssetData(String assetSymbol) {
+    public String getMethod(String apiUrl) {
         StringBuilder response = new StringBuilder();
-        String apiUrl = "https://api.coinapi.io/v1/assets/" + assetSymbol;
 
         try {
             URL url = new URL(apiUrl);
@@ -36,7 +35,16 @@ public class CoinAPI {
             e.printStackTrace();
         }
 
-        String jsonString = response.toString().replace("[", "").replace("]", "");
+        return response.toString();
+    }
+
+    public AssetData getAssetData(String assetSymbol) {
+        
+        String apiUrl = "https://api.coinapi.io/v1/assets/" + assetSymbol;
+
+        String output = getMethod(apiUrl);
+
+        String jsonString = output.replace("[", "").replace("]", "");
         Gson gson = new Gson(); 
         AssetData assetData = gson.fromJson(jsonString, AssetData.class);
 
@@ -45,29 +53,11 @@ public class CoinAPI {
 
     public ExchangeData getExchangeData(String assetID, String exchangeID) {
         String symbolID = exchangeID + "_SPOT_" + assetID + "_USD";
-        String apiURL = "https://rest.coinapi.io/v1/orderbooks/" + symbolID + "/current/?limit_levels=1";
+        String apiUrl = "https://rest.coinapi.io/v1/orderbooks/" + symbolID + "/current/?limit_levels=1";
 
-        StringBuilder response = new StringBuilder();
-        try {
-            URL url = new URL(apiURL);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("X-CoinAPI-Key", API_KEY);
+        String output = getMethod(apiUrl);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-
-            in.close();
-            con.disconnect();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String jsonString = response.toString().replace("[", "").replace("]", "");
+        String jsonString = output.replace("[", "").replace("]", "");
         Gson gson = new Gson(); 
         ExchangeData exchangeData = gson.fromJson(jsonString, ExchangeData.class);
         exchangeData.setExchange(exchangeID);
