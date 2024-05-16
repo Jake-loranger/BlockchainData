@@ -39,4 +39,13 @@ public class ExchangeData extends CoinAPI {
         this.spread =  asks.get("price") - bids.get("price");
         return spread;
     }
+
+    public void display() {
+        System.out.println( 
+            exchange_name + 
+            "\nLowest Ask: $" + asks.get("price") + 
+            "\nHighest Bid: $" + bids.get("price") + 
+            "\nSpread: " + this.getSpread() + "\n"
+        );
+    }
 }
