@@ -1,8 +1,19 @@
 package com.example.models;
 
+import org.springframework.data.annotation.Id;
+
 import com.example.util.CoinAPI;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "assetData")
 public class AssetData extends CoinAPI {
+    @Id
+    @GeneratedValue
+    private Long id;
     private String name;
     private String asset_id;
     private float price_usd;
@@ -10,6 +21,15 @@ public class AssetData extends CoinAPI {
     private float volume_1day_usd;
     private float volume_1hrs_usd;
     
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getAssetName() {
         return name;
     }
